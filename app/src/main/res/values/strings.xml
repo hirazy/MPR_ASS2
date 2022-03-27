@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">MPR_ASS2</string>
+
+    <string name="tvMyCart">My Cart</string>
+    <string name="tvSearchHint">Search Product</string>
+
+    <string name="hintSearchMain">Search Product</string>
+
+    <string name="tvTotal">Total</string>
+    <string name="tvCheckout">Checkout</string>
+
 </resources>
