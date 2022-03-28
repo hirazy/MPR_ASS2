@@ -7,16 +7,32 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.mpr_ass2.adapter.ShoppingCartAdapter;
+import com.example.mpr_ass2.model.Product;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ShoppingCartAdapter.OnClickItem {
 
     private LottieAnimationView animShoppingItem;
     private ShoppingCartAdapter shoppingCartAdapter;
     private RecyclerView rcvShoppingCart;
+    private ArrayList<Product> products;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +57,89 @@ public class MainActivity extends AppCompatActivity implements ShoppingCartAdapt
             }
         });
 
+        products = new ArrayList<>();
 
+        progressBar = findViewById(R.id.pbMain);
         rcvShoppingCart = findViewById(R.id.rcvShoppingCart);
         rcvShoppingCart.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
 
-        shoppingCartAdapter = new ShoppingCartAdapter(Constants.listProduct(), this);
-        rcvShoppingCart.setAdapter(shoppingCartAdapter);
 
+        GetProductList getProductList = new GetProductList();
+        getProductList.execute();
+
+    }
+
+    public class GetProductList extends AsyncTask<String, String, String>{
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            try {
+                JSONArray jsonArray = new JSONArray(s);
+
+                for(int i = 0; i < jsonArray.length();i++){
+
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    products.add(new Product(
+                            jsonObject.getInt("id"),
+                            jsonObject.getString("thumbnail"),
+                            jsonObject.getString("name"),
+                            jsonObject.getLong("unitPrice")
+                    ));
+                }
+
+                progressBar.setVisibility(View.GONE);
+                rcvShoppingCart.setVisibility(View.VISIBLE);
+                shoppingCartAdapter = new ShoppingCartAdapter(products, MainActivity.this);
+                rcvShoppingCart.setAdapter(shoppingCartAdapter);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            String current = "";
+            try {
+                URL url;
+                HttpURLConnection urlConnection = null;
+                try {
+                    url = new URL(Constants.BASE_URL);
+                    urlConnection = (HttpURLConnection) url.openConnection();
+                    InputStream in = urlConnection.getInputStream();
+                    InputStreamReader isw = new InputStreamReader(in);
+                    int data = isw.read();
+
+                    while (data != -1) {
+                        current += (char) data;
+                        data = isw.read();
+                        System.out.print(current);
+                    }
+                    Log.d("datalength",""+current.length());
+                    // return the data to onPostExecute method
+                    return current;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (urlConnection != null) {
+                        urlConnection.disconnect();
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "Exception: " + e.getMessage();
+            }
+            return current;
+        }
     }
 
     @Override

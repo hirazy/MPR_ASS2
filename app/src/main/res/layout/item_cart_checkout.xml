@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/imgThumbnailCartCheckout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_thumbnail_test"
+
+            />
+
+        <RelativeLayout
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toLeftOf="@id/layoutCheckoutQuantity"
+            android:layout_toRightOf="@+id/imgThumbnailCartCheckout"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvNameCheckoutProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:maxLines="2"
+                android:text="Den ngu 3D led de ban" />
+
+            <TextView
+                android:id="@+id/tvUnitPriceCheckoutProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:text="đ 60.000"
+                android:textColor="@color/colorTextUnitPrice" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/tvPriceCheckout"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:gravity="right">
+
+            <TextView
+                android:id="@+id/tvSumPriceCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:text="234.000"
+                android:textColor="@color/colorTextUnitPrice" />
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/layoutCheckoutQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@id/tvPriceCheckout">
+
+            <ImageButton
+                android:id="@+id/btnAddCartCheckout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@null"
+                android:src="@mipmap/add" />
+
+            <ImageButton
+                android:id="@+id/btnMinusCartCheckout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@null"
+                android:src="@mipmap/minus" />
+
+            <TextView
+                android:id="@+id/tvQuantityCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorTextUnitPrice" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

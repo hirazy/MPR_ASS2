@@ -69,6 +69,7 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:visibility="gone"
         android:background="@color/colorBgMain"
         android:layout_width="match_parent"
         android:layout_marginTop="20dp"
@@ -77,7 +78,6 @@
         />
 
     <ProgressBar
-        android:visibility="gone"
         android:layout_marginTop="10dp"
         android:id="@+id/pbMain"
         android:layout_gravity="center"

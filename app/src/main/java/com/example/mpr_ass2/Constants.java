@@ -7,6 +7,8 @@ import java.util.Arrays;
 
 public class Constants {
 
+    public static String BASE_URL = "https://mpr-cart-api.herokuapp.com/products";
+
 
     public static Product[] products = {
             new Product(1, "https://cf.shopee.vn/file/beca50e46d2088fc5ad3c74aff5cc112",
