@@ -34,37 +34,51 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_marginTop="30dp"
+        android:id="@+id/layoutTvCart"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tbCart"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp">
 
         <ImageView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:layout_gravity="center"
             />
+
         <TextView
-            android:textSize="18sp"
-            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tvMyCart"
+            android:textColor="@color/black"
+            android:textSize="20sp"
 
             />
     </LinearLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvCartCheckout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layoutCheckout"
+        android:layout_below="@+id/layoutTvCart"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
+
 
     <RelativeLayout
+        android:id="@+id/layoutCheckout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/bg_layout_checkout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:paddingTop="10dp"
         android:paddingBottom="10dp">
 
@@ -77,35 +91,35 @@
             android:textColor="@color/black" />
 
         <TextView
-            android:textSize="17sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="đ 490000"
-            android:textColor="@color/colorTextUnitPrice" />
+            android:textColor="@color/colorTextUnitPrice"
+            android:textSize="17sp" />
 
         <LinearLayout
-            android:gravity="center"
-            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="20dp">
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageView
-                android:layout_gravity="center"
-                android:src="@drawable/ic_checkout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:textColor="@color/colorItemShoppingCart"
-                android:layout_gravity="center"
-                android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tvCheckout" />
+                android:layout_gravity="center"
+                android:src="@drawable/ic_checkout" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/tvCheckout"
+                android:textColor="@color/colorItemShoppingCart" />
         </LinearLayout>
     </RelativeLayout>
 

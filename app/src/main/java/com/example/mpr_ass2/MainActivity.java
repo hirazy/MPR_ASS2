@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.mpr_ass2.adapter.ShoppingCartAdapter;
+import com.example.mpr_ass2.data.CartManager;
 import com.example.mpr_ass2.model.Product;
 
 import org.json.JSONArray;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements ShoppingCartAdapt
     private RecyclerView rcvShoppingCart;
     private ArrayList<Product> products;
     private ProgressBar progressBar;
+    private CartManager cartManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,13 +65,15 @@ public class MainActivity extends AppCompatActivity implements ShoppingCartAdapt
         rcvShoppingCart = findViewById(R.id.rcvShoppingCart);
         rcvShoppingCart.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
 
+        cartManager = CartManager.getInstance(this);
 
         GetProductList getProductList = new GetProductList();
         getProductList.execute();
 
+
     }
 
-    public class GetProductList extends AsyncTask<String, String, String>{
+    public class GetProductList extends AsyncTask<String, String, String> {
 
         @Override
         protected void onPostExecute(String s) {
@@ -78,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements ShoppingCartAdapt
             try {
                 JSONArray jsonArray = new JSONArray(s);
 
-                for(int i = 0; i < jsonArray.length();i++){
+                for (int i = 0; i < jsonArray.length(); i++) {
 
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
 
@@ -124,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements ShoppingCartAdapt
                         data = isw.read();
                         System.out.print(current);
                     }
-                    Log.d("datalength",""+current.length());
+                    Log.d("datalength", "" + current.length());
                     // return the data to onPostExecute method
                     return current;
                 } catch (Exception e) {
@@ -149,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements ShoppingCartAdapt
 
     @Override
     public void onClickAdd(int pos) {
-
+        Log.e("onClickAdd", pos + "");
+        cartManager.update(products.get(pos), true);
     }
 }

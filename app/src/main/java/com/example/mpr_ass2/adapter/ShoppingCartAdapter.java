@@ -1,8 +1,10 @@
 package com.example.mpr_ass2.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,17 +38,24 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ShoppingCartBinding holder, int position) {
+    public void onBindViewHolder(@NonNull ShoppingCartBinding holder, @SuppressLint("RecyclerView") int position) {
         Product product = list.get(position);
 
         // Thumbnail
-        new DownloadImagesTask(holder.imgThumbnailProduct).execute(product.thumbnail);
+        new DownloadImagesTask(holder.imgThumbnailProduct).execute(product.getThumbnail());
 
         // Name
-        holder.tvNameProduct.setText(product.name);
+        holder.tvNameProduct.setText(product.getName());
 
         // Unit Price
-        holder.tvUnitPriceProduct.setText("đ " + product.unitPrice);
+        holder.tvUnitPriceProduct.setText("đ " + product.getUnitPrice());
+
+        holder.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickItem.onClickAdd(position);
+            }
+        });
     }
 
 
@@ -60,6 +69,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         public ImageView imgThumbnailProduct;
         public TextView tvNameProduct;
         public TextView tvUnitPriceProduct;
+        public ImageButton btnAdd;
 
         public ShoppingCartBinding(@NonNull View itemView) {
             super(itemView);
@@ -67,6 +77,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             imgThumbnailProduct = itemView.findViewById(R.id.imgThumbnailProduct);
             tvNameProduct = itemView.findViewById(R.id.tvNameProduct);
             tvUnitPriceProduct = itemView.findViewById(R.id.tvUnitPriceProduct);
+            btnAdd = itemView.findViewById(R.id.btnAddCart);
         }
     }
 

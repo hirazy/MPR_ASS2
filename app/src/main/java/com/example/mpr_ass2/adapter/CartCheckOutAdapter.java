@@ -13,19 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mpr_ass2.R;
 import com.example.mpr_ass2.model.Product;
-import com.example.mpr_ass2.model.ProductDatabase;
 import com.example.mpr_ass2.utils.DownloadImagesTask;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class CartCheckOutAdapter extends RecyclerView.Adapter<CartCheckOutAdapter.CartCheckoutBinding> {
 
-    ArrayList<ProductDatabase> list;
+    ArrayList<Product> list;
     OnClickItemCheckout onClickItem;
 
-    public CartCheckOutAdapter(ArrayList<ProductDatabase> list, OnClickItemCheckout onClickItem) {
+    public CartCheckOutAdapter(ArrayList<Product> list, OnClickItemCheckout onClickItem) {
         this.list = list;
 
         this.onClickItem = onClickItem;
@@ -34,20 +31,20 @@ public class CartCheckOutAdapter extends RecyclerView.Adapter<CartCheckOutAdapte
     @NonNull
     @Override
     public CartCheckoutBinding onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cart, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cart_checkout, parent, false);
         return new CartCheckOutAdapter.CartCheckoutBinding(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CartCheckoutBinding holder, @SuppressLint("RecyclerView") int position) {
-        ProductDatabase productDatabase = list.get(position);
+        Product product = list.get(position);
 
-        new DownloadImagesTask(holder.imgThumbnail).execute(productDatabase.thumbnail);
+        new DownloadImagesTask(holder.imgThumbnail).execute(product.getThumbnail());
 
-        holder.tvName.setText(productDatabase.name);
-        holder.tvUnitPrice.setText("đ " + productDatabase.unitPrice);
-        holder.tvQuantity.setText("" + productDatabase.quantity);
-        Long sumPrice = productDatabase.unitPrice * productDatabase.quantity;
+        holder.tvName.setText(product.getName());
+        holder.tvUnitPrice.setText("đ " + product.getUnitPrice());
+        holder.tvQuantity.setText("" + product.getQuantity());
+        Long sumPrice = product.getUnitPrice() * product.getQuantity();
         holder.tvSumPrice.setText("" + sumPrice);
 
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +57,7 @@ public class CartCheckOutAdapter extends RecyclerView.Adapter<CartCheckOutAdapte
         holder.btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(productDatabase.quantity != 0){
+                if(product.getQuantity() != 0){
                     onClickItem.onClickMinusCheckout(position);
                 }
             }
