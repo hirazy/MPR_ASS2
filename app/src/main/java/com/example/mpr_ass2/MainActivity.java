@@ -7,11 +7,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieDrawable;
 import com.example.mpr_ass2.adapter.ShoppingCartAdapter;
 import com.example.mpr_ass2.data.CartManager;
 import com.example.mpr_ass2.model.Product;
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements ShoppingCartAdapt
     private ArrayList<Product> products;
     private ProgressBar progressBar;
     private CartManager cartManager;
+    private EditText edtProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +52,10 @@ public class MainActivity extends AppCompatActivity implements ShoppingCartAdapt
 
     private void init() {
         animShoppingItem = findViewById(R.id.animShoppingMain);
-        animShoppingItem.setAnimation(R.raw.ic_shopping_main);
+        animShoppingItem.setAnimation(R.raw.shopping_cart);
         animShoppingItem.playAnimation();
+
+        animShoppingItem.setRepeatCount(LottieDrawable.INFINITE);
 
         animShoppingItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +76,25 @@ public class MainActivity extends AppCompatActivity implements ShoppingCartAdapt
 
         GetProductList getProductList = new GetProductList();
         getProductList.execute();
+
+        edtProduct = findViewById(R.id.edtProduct);
+
+        edtProduct.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                shoppingCartAdapter.getFilter().filter(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
 
     }

@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="10dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
+    android:background="@drawable/bg_item_cart_checkout"
     android:layout_height="wrap_content">
 
     <RelativeLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="100dp">
 
         <ImageView
-            android:layout_centerVertical="true"
             android:id="@+id/imgThumbnailCartCheckout"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:scaleType="centerCrop"
-            android:src="@mipmap/ic_thumbnail_test"
-
-            />
+            android:src="@mipmap/ic_thumbnail_test" />
 
         <RelativeLayout
-            android:layout_marginRight="20dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
             android:layout_toLeftOf="@id/layoutCheckoutQuantity"
             android:layout_toRightOf="@+id/imgThumbnailCartCheckout"
             android:orientation="vertical">
@@ -39,7 +40,8 @@
                 android:ellipsize="end"
                 android:gravity="left"
                 android:maxLines="2"
-                android:text="Den ngu 3D led de ban" />
+                android:text="Den ngu 3D led de ban"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/tvUnitPriceCheckoutProduct"
@@ -74,6 +76,8 @@
 
 
         <RelativeLayout
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:id="@+id/layoutCheckoutQuantity"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

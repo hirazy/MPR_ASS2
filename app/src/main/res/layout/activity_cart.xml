@@ -25,7 +25,7 @@
             android:textSize="17sp" />
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/animShoppingMain"
+            android:id="@+id/animToolBar"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
@@ -33,32 +33,34 @@
             android:layout_marginRight="20dp" />
     </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/layoutTvCart"
-        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tbCart"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animCartShopping"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            />
+            android:layout_marginRight="20dp" />
 
         <TextView
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
+            android:layout_below="@+id/animCartShopping"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/tvMyCart"
             android:textColor="@color/black"
             android:textSize="20sp"
-
+            android:textStyle="bold"
             />
-    </LinearLayout>
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvCartCheckout"

@@ -26,19 +26,18 @@
             android:textSize="17sp" />
 
         <com.airbnb.lottie.LottieAnimationView
-            android:layout_marginRight="20dp"
-            android:layout_centerVertical="true"
             android:id="@+id/animShoppingMain"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp" />
     </RelativeLayout>
 
     <RelativeLayout
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:focusableInTouchMode="true"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
         android:background="@drawable/bg_layout_search"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -55,6 +54,7 @@
             android:src="@drawable/ic_search" />
 
         <EditText
+            android:id="@+id/edtProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

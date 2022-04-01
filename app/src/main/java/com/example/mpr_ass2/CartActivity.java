@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.mpr_ass2.adapter.CartCheckOutAdapter;
 import com.example.mpr_ass2.data.CartManager;
 import com.example.mpr_ass2.model.Product;
@@ -20,6 +21,7 @@ public class CartActivity extends AppCompatActivity implements CartCheckOutAdapt
     CartCheckOutAdapter adapter;
     RecyclerView recyclerView;
     ArrayList<Product> products;
+    LottieAnimationView animCartShopping, animToolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,18 @@ public class CartActivity extends AppCompatActivity implements CartCheckOutAdapt
         recyclerView = findViewById(R.id.rcvCartCheckout);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        animCartShopping = findViewById(R.id.animCartShopping);
+
+        animToolBar = findViewById(R.id.animToolBar);
+
+        animCartShopping = findViewById(R.id.animCartShopping);
+        animCartShopping.setAnimation(R.raw.shopping_cart);
+        animCartShopping.playAnimation();
+
+        animToolBar = findViewById(R.id.animToolBar);
+        animToolBar.setAnimation(R.raw.shopping_cart);
+        animToolBar.playAnimation();
 
         recyclerView.setAdapter(adapter);
 
