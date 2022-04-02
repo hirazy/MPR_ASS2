@@ -1,5 +1,11 @@
 package com.example.mpr_ass2.data;
 
+import static com.example.mpr_ass2.data.DbHelper.DB_NAME;
+import static com.example.mpr_ass2.data.DbHelper.ID_COL;
+import static com.example.mpr_ass2.data.DbHelper.QUANTITY_COL;
+import static com.example.mpr_ass2.data.DbHelper.TABLE_NAME;
+
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -65,15 +71,26 @@ public class CartManager {
                         product.getId() + "," +
                         "'" + product.getThumbnail() + "'" + "," +
                         "'" + product.getName() + "'" + "," +
-                        1 + "," +
-                        product.getQuantity()
+                        product.getUnitPrice() + "," +
+                        1
                         + ")");
             } else {
 
+                ContentValues values = new ContentValues();
+
+                values.put(QUANTITY_COL, product.getQuantity() + 1);
+
+                int isUpdated = db.update(TABLE_NAME, values, ID_COL + "= ?", new String[]{Integer.toString(product.getId())});
             }
         } else {
-            if (product.getQuantity() == 0) {
+            if (product.getQuantity() == 1) {
+                int isDeleted = db.delete(TABLE_NAME, ID_COL + " = ?", new String[]{Integer.toString(product.getId())});
+            } else {
+                ContentValues values = new ContentValues();
 
+                values.put(QUANTITY_COL, product.getQuantity() - 1);
+
+                int isUpdated = db.update(TABLE_NAME, values, ID_COL + "= ?", new String[]{Integer.toString(product.getId())});
             }
         }
         return true;

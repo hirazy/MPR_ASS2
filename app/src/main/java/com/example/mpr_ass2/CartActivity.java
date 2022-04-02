@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.mpr_ass2.adapter.CartCheckOutAdapter;
@@ -22,6 +23,7 @@ public class CartActivity extends AppCompatActivity implements CartCheckOutAdapt
     RecyclerView recyclerView;
     ArrayList<Product> products;
     LottieAnimationView animCartShopping, animToolBar;
+    TextView tvTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +39,6 @@ public class CartActivity extends AppCompatActivity implements CartCheckOutAdapt
 
         products = cartManager.getAll();
 
-        Log.e("PRODUCTS", products.get(0).toString());
-
         adapter = new CartCheckOutAdapter(products, this);
 
         recyclerView = findViewById(R.id.rcvCartCheckout);
@@ -48,6 +48,10 @@ public class CartActivity extends AppCompatActivity implements CartCheckOutAdapt
         animCartShopping = findViewById(R.id.animCartShopping);
 
         animToolBar = findViewById(R.id.animToolBar);
+
+        tvTotal = findViewById(R.id.tvTotal);
+
+        setTotal();
 
         animCartShopping = findViewById(R.id.animCartShopping);
         animCartShopping.setAnimation(R.raw.shopping_cart);
@@ -63,11 +67,28 @@ public class CartActivity extends AppCompatActivity implements CartCheckOutAdapt
 
     @Override
     public void onClickAddCheckout(int pos) {
-        cartManager.update(products.get(pos), true);
+        updateItem(pos, true);
     }
 
     @Override
     public void onClickMinusCheckout(int pos) {
-        cartManager.update(products.get(pos), false);
+        updateItem(pos, false);
+    }
+
+    public void updateItem(int pos, boolean isPlus) {
+        cartManager.update(products.get(pos), isPlus);
+        products = cartManager.getAll();
+        setTotal();
+        adapter.setList(products);
+        adapter.notifyItemChanged(pos);
+    }
+
+    public void setTotal(){
+        long sum = 0;
+        for(int i = 0; i < products.size();i++){
+            long totalCheckout = products.get(i).getUnitPrice() * products.get(i).getQuantity();
+            sum += totalCheckout;
+        }
+        tvTotal.setText("đ " + Long.toString(sum));
     }
 }

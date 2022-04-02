@@ -28,6 +28,10 @@ public class CartCheckOutAdapter extends RecyclerView.Adapter<CartCheckOutAdapte
         this.onClickItem = onClickItem;
     }
 
+    public void setList(ArrayList<Product> list){
+        this.list = list;
+    }
+
     @NonNull
     @Override
     public CartCheckoutBinding onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
