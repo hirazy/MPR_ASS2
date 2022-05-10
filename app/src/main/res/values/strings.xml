@@ -8,5 +8,10 @@
 
     <string name="tvTotal">Total</string>
     <string name="tvCheckout">Checkout</string>
+    
+    <string name="tvQuantity">Quantity</string>
+    <string name="tvSumPrice">Sum price</string>
+
+    <string name="tvCartEmpty">Empty Cart</string>
 
 </resources>

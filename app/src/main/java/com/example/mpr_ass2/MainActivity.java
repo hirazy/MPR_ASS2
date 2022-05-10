@@ -178,8 +178,8 @@ public class MainActivity extends AppCompatActivity implements ShoppingCartAdapt
     }
 
     @Override
-    public void onClickAdd(int pos) {
-        Log.e("onClickAdd", pos + "");
-        cartManager.update(products.get(pos), true);
+    public void onClickAdd(Product product) {
+        Log.e("onClickAdd", product.getId() + "");
+        cartManager.update(product, true);
     }
 }

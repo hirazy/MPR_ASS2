@@ -76,12 +76,19 @@ public class CartManager {
                         + ")");
             } else {
 
+                cursor.moveToNext();
+
+                int quantityIndex = cursor.getColumnIndex("quantity");
+                int quantity = cursor.getInt(quantityIndex);
+
                 ContentValues values = new ContentValues();
 
-                values.put(QUANTITY_COL, product.getQuantity() + 1);
+                values.put(QUANTITY_COL, quantity + 1);
 
                 int isUpdated = db.update(TABLE_NAME, values, ID_COL + "= ?", new String[]{Integer.toString(product.getId())});
             }
+
+            cursor.close();
         } else {
             if (product.getQuantity() == 1) {
                 int isDeleted = db.delete(TABLE_NAME, ID_COL + " = ?", new String[]{Integer.toString(product.getId())});

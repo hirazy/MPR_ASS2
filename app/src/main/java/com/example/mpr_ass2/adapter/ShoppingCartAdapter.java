@@ -58,7 +58,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClickItem.onClickAdd(position);
+                onClickItem.onClickAdd(product);
             }
         });
     }
@@ -124,6 +124,6 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     public interface OnClickItem{
         void onClick(int pos);
 
-        void onClickAdd(int pos);
+        void onClickAdd(Product product);
     }
 }
